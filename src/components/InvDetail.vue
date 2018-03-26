@@ -15,7 +15,7 @@
           <p><span>融资余额</span>{{balance}}元</p>
           <p><span>借款期限</span>{{term}}个月</p>
           <p><span>还款方式</span>{{method}}</p>
-          <p><span>结束时间</span><span class="color">{{endTime}}</span></p>
+          <p><span>结束时间</span><span @click="timer" class="color">{{endTime}}</span></p>
         </div>
         <div class="progbar">还款中</div>
         <div class="infor">
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+
     export default {
       name: "inv-detail",
       data(){
@@ -97,7 +98,33 @@
         handleClick(type){
           console.log(type);
           this.index=type;
-        }
+        },
+        timer(){
+          var time_end=new Date('2018/3/28 23:59:59');
+          time_end=time_end.getTime();
+          var time_now,time_distance,str_time;
+          var int_day,int_hour,int_minute,int_second;
+          time_now=new Date();
+          time_now=time_now.getTime();
+          time_distance=time_end-time_now;
+          if(time_distance>0){
+            int_day = Math.floor(time_distance / 86400000);
+            time_distance -= int_day * 86400000;
+            int_hour = Math.floor(time_distance / 3600000);
+            time_distance -= int_hour *3600000;
+            int_minute = Math.floor(time_distance / 60000);
+            time_distance -= int_minute * 60000;
+            int_second = Math.floor(time_distance / 1000);
+            if(int_hour<10) int_hour="0"+int_hour;
+            if(int_minute<10) int_minute="0"+int_minute;
+            if(int_second<10) int_second="0"+int_second;
+            str_time = int_day + "天" + int_hour + "时" + int_minute + "分" + int_second + "秒";
+            this.endTime = str_time;
+            setTimeout(this.timer,1000);
+          }else{
+            this.endTime="活动已结束";
+          }
+        },
       }
     }
 </script>

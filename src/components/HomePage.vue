@@ -5,7 +5,7 @@
       </header>
       <div id="main">
         <div class="HomePage">
-          <img class="adver" src="../assets/home.png" alt="">
+          <img class="adver"  src="@/assets/home.png" alt="">
           <div class="dataShow">
             <div class="data">
               <div class="content">
